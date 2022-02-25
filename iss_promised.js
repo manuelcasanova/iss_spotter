@@ -12,10 +12,17 @@ const fetchCoordsByIP = function(body) {  //Makes a request to freegeoip.app Get
   return request(`https://freegeoip.app/json/${ip}`)
 };
 
-module.exports = { fetchMyIP, fetchCoordsByIP };
+
+const fetchISSFlyOverTimes = function(ip) {
+  const latitude = JSON.parse(body).latitude;
+  const longitude = JSON.parse(body).longitude;
+  return request(`https://iss-pass.herokuapp.com/json/?lat=${latitude}&lon=${longitude}`)
+}
+
 
 
 module.exports = { 
   fetchMyIP,
-  fetchCoordsByIP
+  fetchCoordsByIP,
+  fetchISSFlyOverTimes
 };
