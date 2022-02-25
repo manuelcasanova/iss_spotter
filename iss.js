@@ -29,4 +29,12 @@ const fetchMyIP = function(callback) {
     })
   };
 
-module.exports = { fetchMyIP };
+
+const fetchCoordsByIp = function(ip, callback) {
+
+}
+
+
+module.exports = { 
+  fetchMyIP,
+fetchCoordsByIp };
