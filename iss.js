@@ -1,12 +1,3 @@
-/**
-* Makes a single API request to retrieve the user's IP address.
-* Input:
-*   - A callback (to pass back an error or the IP string)
-* Returns (via Callback):
-*   - An error, if any (nullable)
-*   - The IP address as a string (null if error). Example: "162.245.144.188"
-*/
-
 const request = require('request');
 
 const fetchMyIP = function(callback) {
@@ -63,6 +54,10 @@ const fetchIssFlyOverTimes = function(coords, callback) {
   });
 };
 
+const nextISSTimesForMyLocation = function(callback) {
+
+}
+
 
 //TESTS TO SEE WHAT AM I REQUESTING
 /*
@@ -86,4 +81,6 @@ request(url, (error, response, body) => {
 module.exports = {
   fetchMyIP,
   fetchCoordsByIp,
-  fetchIssFlyOverTimes };
+  fetchIssFlyOverTimes,
+  nextISSTimesForMyLocation
+};
