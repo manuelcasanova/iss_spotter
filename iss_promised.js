@@ -13,16 +13,26 @@ const fetchCoordsByIP = function(body) {  //Makes a request to freegeoip.app Get
 };
 
 
-const fetchISSFlyOverTimes = function(ip) {
+const fetchISSFlyOverTimes = function(body) {
   const latitude = JSON.parse(body).latitude;
   const longitude = JSON.parse(body).longitude;
   return request(`https://iss-pass.herokuapp.com/json/?lat=${latitude}&lon=${longitude}`)
 }
 
+const nextISSTimesForMyLocation = function() {
+  return fetchMyIP()
+    .then(fetchCoordsByIP)
+    .then(fetchISSFlyOverTimes)
+    .then((data) => {
+      const { response } = JSON.parse(data);
+      return response;
+    });
+};
 
 
 module.exports = { 
-  fetchMyIP,
-  fetchCoordsByIP,
-  fetchISSFlyOverTimes
+  // fetchMyIP,
+  // fetchCoordsByIP,
+  // fetchISSFlyOverTimes,
+  nextISSTimesForMyLocation
 };
