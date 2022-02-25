@@ -19,7 +19,7 @@ const fetchMyIP = function(callback) {
 };
 
 
-const fetchCoordsByIp = function(ip, callback) {
+const fetchCoordsByIP = function(ip, callback) {
   const url = `https://freegeoip.app/json/${ip}`;
   request(url, (error, response, body) => {
     if (error) {
@@ -55,8 +55,30 @@ const fetchIssFlyOverTimes = function(coords, callback) {
 };
 
 const nextISSTimesForMyLocation = function(callback) {
+  fetchMyIP((error, ip) => {
+    if (error) {
+      return callback(error, null);
+    }
 
-}
+    fetchCoordsByIP(ip, (error, loc) => {
+      if (error) {
+        return callback(error, null);
+      }
+
+      fetchIssFlyOverTimes(loc, (error, nextPasses) => {
+        if (error) {
+          return callback(error, null);
+        }
+
+        callback(null, nextPasses);
+      });
+    });
+  });
+};
+
+
+
+
 
 
 //TESTS TO SEE WHAT AM I REQUESTING
@@ -80,7 +102,7 @@ request(url, (error, response, body) => {
 
 module.exports = {
   fetchMyIP,
-  fetchCoordsByIp,
+  fetchCoordsByIP,
   fetchIssFlyOverTimes,
   nextISSTimesForMyLocation
 };
