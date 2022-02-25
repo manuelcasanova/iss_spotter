@@ -14,20 +14,18 @@ const fetchMyIP = function(callback) {
   request(url, (error, response, body) => {
     if (error) {
       return callback(error, null);
-    } 
+    }
     
     if (response.statusCode !== 200) {
       const msg = `Status Code ${response.statusCode} when fetching IP. Response: ${body}`;
       callback(Error(msg), null);
       return;
-    }
-    
-    else {
+    } else {
       const ip = JSON.parse(body).ip;
-        return callback(null, ip);
-      }
-    })
-  };
+      return callback(null, ip);
+    }
+  });
+};
 
 
 const fetchCoordsByIp = function(ip, callback) {
@@ -45,10 +43,10 @@ const fetchCoordsByIp = function(ip, callback) {
       callback(null, {latitude, longitude});
     }
 
-  })
+  });
 };
 
 
-module.exports = { 
+module.exports = {
   fetchMyIP,
-fetchCoordsByIp };
+  fetchCoordsByIp };
