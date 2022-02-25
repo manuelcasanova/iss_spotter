@@ -31,23 +31,18 @@ const fetchMyIP = function(callback) {
 
 
 const fetchCoordsByIp = function(ip, callback) {
-  const url = 'https://api.freegeoip.app/json/?apikey=993e7850-95e9-11ec-a11d-db8fc96eaf60';
+  const url = `https://freegeoip.app/json/${ip}`;
   request(url, (error, response, body) => {
     if (error) {
       return callback(error, null);
     }
     if (response.statusCode !== 200) {
-      const msg = `Status Code ${response.statusCode}. Response: ${body}`;
-      callback(Error(msg), null);
+      callback(Error(`Status Code ${response.statusCode} when fetching Coordinates for IP: ${body}`), null);
       return;
-    } 
-    if (response.statusCode === 404) {
-      const msg = `Status code ${response.statusCode}. Response> ${body}`;
-      callback(Error(msg), null);
     } else {
       const latitude = JSON.parse(body).latitude;
       const longitude = JSON.parse(body).longitude;
-      return `latitude: ${latitude}, longitude: ${longitude}`;
+      callback(null, {latitude, longitude});
     }
 
   })
