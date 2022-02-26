@@ -32,12 +32,13 @@ const { fetchMyIP, fetchCoordsByIP, /*fetchISSFlyOverTimes,*/ nextISSTimesForMyL
 //   console.log(`It worked! Time and duration`, data);
 // });
 
-const printPassTimes = function(passTimes) {
-  for (const pass of passTimes) {
-    const datetime = new Date(0);
-    datetime.setUTCSeconds(pass.risetime);
+const printPassTimes = function(passTimes) { //Array of objects
+  for (const pass of passTimes) {            //Loop through the array of objects
+    const datetime = new Date(0);            //0 milliseconds
+    datetime.setUTCSeconds(pass.risetime);   //pass.risetime is the The number of milliseconds between 1 January 1970 00:00:00 UTC and the updated date. This transforms it to a date according to universal time.
     const duration = pass.duration;
     console.log(`Next pass at ${datetime} for ${duration} seconds!`);
+    //console.log(passTimes)
   }
 };
 
